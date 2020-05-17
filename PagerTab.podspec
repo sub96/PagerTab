@@ -20,17 +20,16 @@ s.author = { "Suhaib Al Saghir" => "suhaib.al.saghir@gmail.com" }
 s.homepage = "https://github.com/sub96/PagerTab"
 
 # 6 - Replace this URL with your own Git URL from "Quick Setup"
-s.source = { :git => "https://github.com/sub96/PagerTab.git",
-             :tag => "#{s.version}" }
+s.source = { :git => "https://github.com/sub96/PagerTab.git", :tag => "#{s.version}" }
 
 # 7
 s.framework = "UIKit"
 
 # 8
-s.source_files = "PagerTab/**/*.{swift}"
+s.source_files = "PagerTab/**/*.{h,m,swift,storyboard,xib}"
 
 # 9
-s.resources = "PagerTab/**/*.{png,jpeg,jpg,storyboard,xib,xcassets}"
+# s.resources = "PagerTab/**/*.{png,jpeg,jpg,storyboard,xib,xcassets}"
 
 # 10
 s.swift_version = "4.2"

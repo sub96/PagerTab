@@ -40,7 +40,6 @@ class TabCell: UIView, XibConnected, TabCellProtocol {
             self.tabImageView.image = image
             self.tabLabel.attributedText = text
         }
-        self.tabImageView.image = .strokedCheckmark
     }
     
     func animate(isShowing: Bool) {
