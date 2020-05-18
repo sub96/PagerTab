@@ -52,6 +52,7 @@ class TabCell: UIView, XibConnected, TabCellProtocol {
     }
     
     func updateCounter(with count: Int) {
+        self.notificationView.isHidden = count == 0
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.notificationCounter.text = String(count)
             self?.notificationView.alpha = count == 0 ? 0 : 1
@@ -59,17 +60,18 @@ class TabCell: UIView, XibConnected, TabCellProtocol {
     }
     
     func animate(isShowing: Bool) {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
             if isShowing {
-                self.tabLabel.transform = .init(scaleX: 1.2, y: 1.2)
-                self.tabLabel.alpha = 1
-//                self.notificationView.transform = .init(scaleX: 1.2, y: 1.2)
-//                self.notificationView.alpha = 1
+                self?.tabLabel.transform = .init(scaleX: 1.2, y: 1.2)
+                self?.tabLabel.alpha = 1
+                //                self?.notificationView.transform = .init(scaleX: 1.2, y: 1.2)
+                //                self?.notificationView.alpha = self?.notificationCounter.text == "0" ? 1 : 1
             } else {
-                self.tabLabel.transform = .identity
-                self.tabLabel.alpha = 0.6
-//                self.notificationView.transform = .identity
-//                self.notificationView.alpha = 0.6
+                self?.tabLabel.transform = .identity
+                self?.tabLabel.alpha = 0.6
+                //                self?.notificationView.transform = .identity
+                //                self?.notificationView.alpha = self?.notificationCounter.text == "0" ? 1 : 1
+
             }
         }
     }
