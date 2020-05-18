@@ -18,11 +18,19 @@ class MainPageViewController: UIPageViewController {
     private weak var animatorDelegate: MainPageViewControllerDelegate?
     
     // MARK: - Life cycle
+    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+        super.init(transitionStyle: style,
+                   navigationOrientation: navigationOrientation,
+                   options: options)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureScrollDelegate()
-        self.dataSource = self
-        self.delegate = self
+        configureDelegates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,9 +68,12 @@ class MainPageViewController: UIPageViewController {
     }
     
     // MARK: - Private methods
-    private func configureScrollDelegate() {
+    
+    private func configureDelegates() {
         let scrollView = view.subviews.filter { $0 is UIScrollView }.first as? UIScrollView
         scrollView?.delegate = self
+        self.dataSource = self
+        self.delegate = self
     }
 }
 

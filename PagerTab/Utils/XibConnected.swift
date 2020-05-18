@@ -36,3 +36,36 @@ extension XibConnected where Self: UIView {
         return nib.instantiate(withOwner: self, options: nil).first as! UIView //swiftlint:disable:this force_cast
     }
 }
+
+#warning("update")
+extension UIView {
+    func constraint(to parent: UIView,
+                    with insets: UIEdgeInsets = .zero) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate(
+            [
+                self.topAnchor.constraint(equalTo: parent.topAnchor, constant: insets.top),
+                self.bottomAnchor.constraint(equalTo: parent.bottomAnchor, constant: insets.bottom),
+                self.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: insets.right),
+                self.trailingAnchor.constraint(equalTo: parent.trailingAnchor, constant: insets.left)
+            ]
+        )
+    }
+    
+    func constraintToSafeArea(_ parent: UIView) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            self.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
+            self.trailingAnchor.constraint(equalTo: parent.trailingAnchor)
+        ])
+        
+        let guide = parent.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
+            self.bottomAnchor.constraint(equalToSystemSpacingBelow: guide.bottomAnchor, multiplier: 1.0)
+        ])
+
+    }
+}

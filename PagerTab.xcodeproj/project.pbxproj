@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D6A603724721F2100840498 /* PagerTab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7D6FFD2471EC4800660113 /* PagerTab.framework */; };
+		7D6A603824721F2100840498 /* PagerTab.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7D6FFD2471EC4800660113 /* PagerTab.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D7D70072471EC4800660113 /* PagerTab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D7D6FFD2471EC4800660113 /* PagerTab.framework */; };
 		7D7D700C2471EC4800660113 /* PagerTabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D700B2471EC4800660113 /* PagerTabTests.swift */; };
 		7D7D700E2471EC4800660113 /* PagerTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D7D70002471EC4800660113 /* PagerTab.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -18,10 +20,23 @@
 		7D7D70312471EE5700660113 /* PagerRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70272471EE5700660113 /* PagerRootViewController.swift */; };
 		7D7D70322471EE5700660113 /* PagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70282471EE5700660113 /* PagerProtocols.swift */; };
 		7D7D70332471EE5700660113 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70292471EE5700660113 /* MainPageViewController.swift */; };
-		7D7D70342471EE5700660113 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7D702B2471EE5700660113 /* Main.storyboard */; };
+		7D7D70342471EE5700660113 /* PagerTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7D702B2471EE5700660113 /* PagerTab.storyboard */; };
+		7D7D70442472060200660113 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70432472060200660113 /* AppDelegate.swift */; };
+		7D7D70462472060200660113 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70452472060200660113 /* SceneDelegate.swift */; };
+		7D7D70482472060200660113 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70472472060200660113 /* ViewController.swift */; };
+		7D7D704B2472060200660113 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7D70492472060200660113 /* Main.storyboard */; };
+		7D7D704D2472060400660113 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D7D704C2472060400660113 /* Assets.xcassets */; };
+		7D7D70502472060400660113 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7D704E2472060400660113 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7D6A603924721F2100840498 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D7D6FF42471EC4800660113 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7D7D6FFC2471EC4800660113;
+			remoteInfo = PagerTab;
+		};
 		7D7D70082471EC4800660113 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7D7D6FF42471EC4800660113 /* Project object */;
@@ -30,6 +45,20 @@
 			remoteInfo = PagerTab;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7D6A603B24721F2100840498 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7D6A603824721F2100840498 /* PagerTab.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7D7D6FFD2471EC4800660113 /* PagerTab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PagerTab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,7 +75,15 @@
 		7D7D70272471EE5700660113 /* PagerRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerRootViewController.swift; sourceTree = "<group>"; };
 		7D7D70282471EE5700660113 /* PagerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerProtocols.swift; sourceTree = "<group>"; };
 		7D7D70292471EE5700660113 /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
-		7D7D702B2471EE5700660113 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7D7D702B2471EE5700660113 /* PagerTab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PagerTab.storyboard; sourceTree = "<group>"; };
+		7D7D70412472060200660113 /* PagerTabExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PagerTabExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D7D70432472060200660113 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7D7D70452472060200660113 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7D7D70472472060200660113 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7D7D704A2472060200660113 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7D7D704C2472060400660113 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7D7D704F2472060400660113 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7D7D70512472060400660113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,15 +102,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7D7D703E2472060200660113 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D6A603724721F2100840498 /* PagerTab.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D6A603624721F2100840498 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7D7D6FF32471EC4800660113 = {
 			isa = PBXGroup;
 			children = (
 				7D7D6FFF2471EC4800660113 /* PagerTab */,
 				7D7D700A2471EC4800660113 /* PagerTabTests */,
+				7D7D70422472060200660113 /* PagerTabExample */,
 				7D7D6FFE2471EC4800660113 /* Products */,
+				7D6A603624721F2100840498 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,6 +136,7 @@
 			children = (
 				7D7D6FFD2471EC4800660113 /* PagerTab.framework */,
 				7D7D70062471EC4800660113 /* PagerTabTests.xctest */,
+				7D7D70412472060200660113 /* PagerTabExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,9 +195,23 @@
 		7D7D702A2471EE5700660113 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				7D7D702B2471EE5700660113 /* Main.storyboard */,
+				7D7D702B2471EE5700660113 /* PagerTab.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7D7D70422472060200660113 /* PagerTabExample */ = {
+			isa = PBXGroup;
+			children = (
+				7D7D70432472060200660113 /* AppDelegate.swift */,
+				7D7D70452472060200660113 /* SceneDelegate.swift */,
+				7D7D70472472060200660113 /* ViewController.swift */,
+				7D7D70492472060200660113 /* Main.storyboard */,
+				7D7D704C2472060400660113 /* Assets.xcassets */,
+				7D7D704E2472060400660113 /* LaunchScreen.storyboard */,
+				7D7D70512472060400660113 /* Info.plist */,
+			);
+			path = PagerTabExample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +264,25 @@
 			productReference = 7D7D70062471EC4800660113 /* PagerTabTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		7D7D70402472060200660113 /* PagerTabExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D7D70522472060400660113 /* Build configuration list for PBXNativeTarget "PagerTabExample" */;
+			buildPhases = (
+				7D7D703D2472060200660113 /* Sources */,
+				7D7D703E2472060200660113 /* Frameworks */,
+				7D7D703F2472060200660113 /* Resources */,
+				7D6A603B24721F2100840498 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7D6A603A24721F2100840498 /* PBXTargetDependency */,
+			);
+			name = PagerTabExample;
+			productName = PagerTabExample;
+			productReference = 7D7D70412472060200660113 /* PagerTabExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -209,6 +297,9 @@
 						CreatedOnToolsVersion = 11.4.1;
 					};
 					7D7D70052471EC4800660113 = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+					7D7D70402472060200660113 = {
 						CreatedOnToolsVersion = 11.4.1;
 					};
 				};
@@ -227,6 +318,7 @@
 			projectRoot = "";
 			targets = (
 				7D7D6FFC2471EC4800660113 /* PagerTab */,
+				7D7D70402472060200660113 /* PagerTabExample */,
 				7D7D70052471EC4800660113 /* PagerTabTests */,
 			);
 		};
@@ -238,7 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D7D702F2471EE5700660113 /* TabCell.xib in Resources */,
-				7D7D70342471EE5700660113 /* Main.storyboard in Resources */,
+				7D7D70342471EE5700660113 /* PagerTab.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +338,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7D7D703F2472060200660113 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D7D70502472060400660113 /* LaunchScreen.storyboard in Resources */,
+				7D7D704D2472060400660113 /* Assets.xcassets in Resources */,
+				7D7D704B2472060200660113 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,15 +376,49 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7D7D703D2472060200660113 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D7D70482472060200660113 /* ViewController.swift in Sources */,
+				7D7D70442472060200660113 /* AppDelegate.swift in Sources */,
+				7D7D70462472060200660113 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7D6A603A24721F2100840498 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D7D6FFC2471EC4800660113 /* PagerTab */;
+			targetProxy = 7D6A603924721F2100840498 /* PBXContainerItemProxy */;
+		};
 		7D7D70092471EC4800660113 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7D7D6FFC2471EC4800660113 /* PagerTab */;
 			targetProxy = 7D7D70082471EC4800660113 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7D7D70492472060200660113 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7D7D704A2472060200660113 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7D7D704E2472060400660113 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7D7D704F2472060400660113 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7D7D700F2471EC4800660113 /* Debug */ = {
@@ -491,6 +627,42 @@
 			};
 			name = Release;
 		};
+		7D7D70532472060400660113 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75SMYU6JAM;
+				INFOPLIST_FILE = PagerTabExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sub.PagerTabExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7D7D70542472060400660113 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75SMYU6JAM;
+				INFOPLIST_FILE = PagerTabExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sub.PagerTabExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -517,6 +689,15 @@
 			buildConfigurations = (
 				7D7D70152471EC4800660113 /* Debug */,
 				7D7D70162471EC4800660113 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D7D70522472060400660113 /* Build configuration list for PBXNativeTarget "PagerTabExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D7D70532472060400660113 /* Debug */,
+				7D7D70542472060400660113 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

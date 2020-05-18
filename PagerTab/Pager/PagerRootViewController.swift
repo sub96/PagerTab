@@ -8,47 +8,121 @@
 
 import UIKit
 
-class PagerRootViewController: UIViewController {
+open class PagerRootViewController: UIViewController {
 
-    // MARK: - IBOutlet
-    @IBOutlet private weak var tabStackView: UIStackView!
-    @IBOutlet private weak var indicatorView: UIView!
-    @IBOutlet private weak var indicatorWidthConstraint: NSLayoutConstraint!
+    // MARK: - UI Variables
+    private var tabStackView = UIStackView()
+    private var indicatorView = UIView()
+    private weak var indicatorWidthConstraint: NSLayoutConstraint?
     
-    // MARK: - Variables
+    // MARK: - Data Variables
     private var dataSource: DataSource = []
     private var tabs: [TabCell] = []
-    private weak var pager: MainPageViewController?
-    
+    private var pager: MainPageViewController!
+    private var customizationDictionary: CustomizationDictionary = [:]
     // MARK: - LifeCycle
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
-        configureTab()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        prepareUI()
+        configureTab()
+        customize()
         tabs.first?.animate(isShowing: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "embed",
-            let pager = segue.destination as? MainPageViewController {
-            self.pager = pager
-            pager.configureDataSource(with: dataSource,
-                                      animatorDelegate: self)
-            
-        }
-    }
-    
     // MARK: - Public methods
-    func configure(with dataSource: DataSource) {
+    public func configure(with dataSource: DataSource) {
         self.dataSource = dataSource
     }
     
-    // MARK: - Private methods
+    public func customise(with dictionary: CustomizationDictionary) {
+        self.customizationDictionary = dictionary
+    }
+}
+
+// MARK: - Private methods
+extension PagerRootViewController {
+    
+    /// Main function that prepares the UI
+    private func prepareUI() {
+        let topStackView = generateTabBar()
+        let containerView = generateContainerView()
+        
+        let mainStackView = UIStackView(arrangedSubviews: [topStackView, containerView])
+        mainStackView.axis = .vertical
+        self.view.addSubview(mainStackView)
+        
+        mainStackView.constraintToSafeArea(self.view)
+    
+    }
+    
+    private func generateTabBar() -> UIStackView {
+        
+        let indicatorContainer = configureIndicatorView()
+        let topStack = UIStackView(arrangedSubviews: [tabStackView, indicatorContainer])
+        topStack.axis = .vertical
+        tabStackView.distribution = .fillEqually
+        
+        // set the height of the tabStackView and indicator view
+        // TODO: Add customise key for height
+        tabStackView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tabStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+
+        return topStack
+    }
+    
+    private func configureIndicatorView() -> UIView {
+        let indicatorContainer = UIView()
+        indicatorContainer.addSubview(indicatorView)
+        
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        // TODO: Add customise key for height constraint
+        NSLayoutConstraint.activate([
+            indicatorView.topAnchor.constraint(equalTo: indicatorContainer.topAnchor),
+            indicatorView.bottomAnchor.constraint(equalTo: indicatorContainer.bottomAnchor),
+            indicatorView.leadingAnchor.constraint(equalTo: indicatorContainer.leadingAnchor),
+            indicatorView.heightAnchor.constraint(equalToConstant: 3)
+        ])
+        
+        // The width constrait will be later updated when the datasource is available
+        indicatorWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: 30)
+        indicatorWidthConstraint?.isActive = true
+        
+        // TODO: Add customise key for color
+        indicatorView.backgroundColor = .green
+        
+        return indicatorContainer
+    }
+    
+    private func generateContainerView() -> UIView {
+        let container = UIView()
+        container.backgroundColor = .blue
+        
+        self.pager = MainPageViewController.init(transitionStyle: .scroll,
+                                                 navigationOrientation: .horizontal,
+                                                 options: nil)
+        
+        pager.configureDataSource(with: dataSource,
+                                  animatorDelegate: self)
+        addChild(pager)
+        
+        pager.view.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(pager.view)
+        pager.view.backgroundColor = .green
+        pager.view.constraint(to: container)
+        pager.didMove(toParent: self)
+        return container
+    }
+    
     private func configureTab() {
-        self.indicatorWidthConstraint.constant = UIScreen.main.bounds.width / CGFloat(dataSource.count)
+        self.indicatorWidthConstraint?.constant = UIScreen.main.bounds.width / CGFloat(dataSource.count)
         tabStackView.isMultipleTouchEnabled = false
         for data in dataSource {
             let tabCell = TabCell()
@@ -66,7 +140,6 @@ class PagerRootViewController: UIViewController {
             let destinationIndex = tabs.firstIndex(where: { $0 == gesture.view })
             else { return }
         
-        print("Tab requested scrolling from \(currentIndex) to \(destinationIndex)")
         // Disable user interaction to not spam the user
         self.tabStackView.isUserInteractionEnabled = false
         
@@ -84,6 +157,18 @@ class PagerRootViewController: UIViewController {
             guard let self = self else { return }
             self.indicatorView.frame.origin = CGPoint(x: CGFloat(destinationIndex) * self.indicatorView.bounds.width,
                                                       y: 0)
+        }
+    }
+    
+    private func customize() {
+        self.customizationDictionary.forEach { key, value in
+            switch key {
+            case .tabBackgroundColor:
+                self.tabs.forEach { $0.backgroundColor = value as? UIColor }
+                
+            case .indicatorColor:
+                self.indicatorView.backgroundColor = value as? UIColor
+            }
         }
     }
 }

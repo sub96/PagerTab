@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vWP-BW-NTF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -7,34 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Test View Controller-->
-        <scene sceneID="GPp-c9-pSp">
-            <objects>
-                <viewController id="vWP-BW-NTF" customClass="TestViewController" customModule="PagerTab" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3as-ob-znP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTJ-yp-XCa">
-                                <rect key="frame" x="184" y="438" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="zlk-po-3kC" kind="show" id="u96-Hz-iHm"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="MTJ-yp-XCa" firstAttribute="centerX" secondItem="45K-ZI-BK6" secondAttribute="centerX" id="RHb-fk-DJ6"/>
-                            <constraint firstItem="MTJ-yp-XCa" firstAttribute="centerY" secondItem="45K-ZI-BK6" secondAttribute="centerY" id="ydO-6P-YA6"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="45K-ZI-BK6"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bQN-Zs-o9w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1290" y="1"/>
-        </scene>
         <!--Pager Root View Controller-->
         <scene sceneID="qid-qy-wCU">
             <objects>
@@ -58,7 +30,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7s-QY-1t1">
                                                 <rect key="frame" x="0.0" y="44" width="414" height="3"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8VC-XX-I6M">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8VC-XX-I6M" userLabel="indicator">
                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="3"/>
                                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -95,11 +67,6 @@
                         <viewLayoutGuide key="safeArea" id="KjI-c3-bEg"/>
                     </view>
                     <navigationItem key="navigationItem" id="D5F-8M-eUc"/>
-                    <connections>
-                        <outlet property="indicatorView" destination="8VC-XX-I6M" id="3xn-p5-eZ1"/>
-                        <outlet property="indicatorWidthConstraint" destination="7RW-9d-JIw" id="9IH-q4-cRe"/>
-                        <outlet property="tabStackView" destination="EIM-wz-ZXC" id="UTG-Cu-sYq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJl-uT-nt3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -111,7 +78,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="TGi-gR-Iav" customClass="MainPageViewController" customModule="PagerTab" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akI-nX-PoO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="636" y="1"/>
+            <point key="canvasLocation" x="604" y="32"/>
         </scene>
     </scenes>
 </document>

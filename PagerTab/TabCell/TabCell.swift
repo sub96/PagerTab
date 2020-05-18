@@ -45,11 +45,11 @@ class TabCell: UIView, XibConnected, TabCellProtocol {
     func animate(isShowing: Bool) {
         UIView.animate(withDuration: 0.3) {
             if isShowing {
-                self.transform = .init(scaleX: 1.2, y: 1.2)
-                self.alpha = 1
+                self.tabLabel.transform = .init(scaleX: 1.2, y: 1.2)
+                self.tabLabel.alpha = 1
             } else {
-                self.transform = .identity
-                self.alpha = 0.6
+                self.tabLabel.transform = .identity
+                self.tabLabel.alpha = 0.6
             }
         }
     }

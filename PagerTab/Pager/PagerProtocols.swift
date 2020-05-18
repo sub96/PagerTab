@@ -19,10 +19,21 @@ protocol MainPageViewControllerDelegate: class {
                         completed percentage: CGFloat)
 }
 
-typealias DataSource = [(vc: UIViewController, tabType: TabType)]
+public typealias DataSource = [(vc: UIViewController, tabType: TabType)]
+public typealias CustomizationDictionary = [CustomKeys: Any]
 
-enum TabType {
+public enum TabType {
     case image(UIImage, NSAttributedString)
     case soloText(NSAttributedString)
+}
+
+/// Dictionary with all the possible customizations
+///
+/// - Keys:
+///   - tabBackgroundColor: UIColor
+///   - indicatorColor: UIColor
+public enum CustomKeys: String {
+    case tabBackgroundColor
+    case indicatorColor
 }
 
