@@ -21,6 +21,7 @@ open class PagerRootViewController: UIViewController {
     private var tabs: [TabCell] = []
     private var pager: MainPageViewController!
     private var customizationDictionary: CustomizationDictionary = [:]
+
     // MARK: - LifeCycle
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,10 @@ open class PagerRootViewController: UIViewController {
     
     public func customize(with dictionary: CustomizationDictionary) {
         self.customizationDictionary = dictionary
+    }
+    
+    public func isScrollingEnabled(_ isEnabled: Bool) {
+        pager.isScrollingEnabled(isEnabled)
     }
     
     public func updateCounter(at index: Int, with count: Int) {
@@ -166,8 +171,7 @@ extension PagerRootViewController {
             switch key {
             case .tabBackgroundColor:
                 self.tabContainer.backgroundColor = value as? UIColor
-//                self.tabContainer.layer.opacity = 0.85
-//                self.tabContainer.isOpaque = false
+
             case .indicatorColor:
                 self.indicatorView.backgroundColor = value as? UIColor
                 
@@ -176,6 +180,9 @@ extension PagerRootViewController {
             
             case .badgeColor:
                 self.tabs.forEach { $0.setBadgeColor(value as? UIColor) }
+
+            case .isScrollinEnabled:
+                self.pager.isScrollingEnabled(value as? Bool)
             }
         }
     }

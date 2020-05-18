@@ -32,10 +32,14 @@ public enum TabType {
 /// - Keys:
 ///   - tabBackgroundColor: UIColor
 ///   - indicatorColor: UIColor
+///   - textColor: UIColor
+///   - badgeColor: UIColor
+///   - isScrollinEnabled: Bool
 public enum CustomKeys: String {
     case tabBackgroundColor
     case indicatorColor
     case textColor
     case badgeColor
+    case isScrollinEnabled
 }
 

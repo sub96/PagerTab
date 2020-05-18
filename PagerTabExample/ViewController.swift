@@ -31,7 +31,7 @@ class ViewController: PagerRootViewController {
         customKeys[.tabBackgroundColor] = UIColor.systemRed
         customKeys[.indicatorColor] = UIColor.blue
         customKeys[.textColor] = UIColor.white
-
+        customKeys[.isScrollinEnabled] = false
         self.customize(with: customKeys)
         
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in

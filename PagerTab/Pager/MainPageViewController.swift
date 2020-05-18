@@ -15,6 +15,7 @@ class MainPageViewController: UIPageViewController {
     private var destinationIndex: Int = 0
     private var tabRequestedScroll = false
     private var orderedViewControllers: DataSource = []
+    private var scrollView: UIScrollView?
     private weak var animatorDelegate: MainPageViewControllerDelegate?
     
     // MARK: - Life cycle
@@ -49,6 +50,10 @@ class MainPageViewController: UIPageViewController {
         self.animatorDelegate = animatorDelegate
     }
     
+    func isScrollingEnabled(_ isEnabled: Bool?) {
+        self.scrollView?.isScrollEnabled = isEnabled ?? true
+    }
+    
     func tabDidRequestScroll(to index: Int, onCompletion: @escaping () -> Void) {
         tabRequestedScroll = true
         let destination = orderedViewControllers[index].vc
@@ -70,7 +75,7 @@ class MainPageViewController: UIPageViewController {
     // MARK: - Private methods
     
     private func configureDelegates() {
-        let scrollView = view.subviews.filter { $0 is UIScrollView }.first as? UIScrollView
+        scrollView = view.subviews.filter { $0 is UIScrollView }.first as? UIScrollView
         scrollView?.delegate = self
         self.dataSource = self
         self.delegate = self
