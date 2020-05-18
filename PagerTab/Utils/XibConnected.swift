@@ -55,16 +55,13 @@ extension UIView {
     
     func constraintToSafeArea(_ parent: UIView) {
         self.translatesAutoresizingMaskIntoConstraints = false
+        let guide = parent.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: guide.topAnchor),
+            self.bottomAnchor.constraint(equalTo: parent.bottomAnchor),
             self.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
             self.trailingAnchor.constraint(equalTo: parent.trailingAnchor)
-        ])
-        
-        let guide = parent.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            self.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
-            self.bottomAnchor.constraint(equalToSystemSpacingBelow: guide.bottomAnchor, multiplier: 1.0)
         ])
 
     }

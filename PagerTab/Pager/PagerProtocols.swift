@@ -35,5 +35,7 @@ public enum TabType {
 public enum CustomKeys: String {
     case tabBackgroundColor
     case indicatorColor
+    case textColor
+    case badgeColor
 }
 

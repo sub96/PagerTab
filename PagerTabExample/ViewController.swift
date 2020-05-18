@@ -10,10 +10,9 @@ import UIKit
 import PagerTab
 
 class ViewController: PagerRootViewController {
-    
+    var count = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         var dataSource = DataSource()
         let first = UIViewController()
         first.view.backgroundColor = .yellow
@@ -23,9 +22,14 @@ class ViewController: PagerRootViewController {
         self.configure(with: dataSource)
         
         var customKeys = CustomizationDictionary()
+        self.view.backgroundColor = UIColor.purple
         customKeys[.tabBackgroundColor] = UIColor.green
         customKeys[.indicatorColor] = UIColor.blue
-        self.customise(with: customKeys)
+        self.customize(with: customKeys)
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            self.count += 1
+            self.updateCounter(at: 1, with: self.count)
+        }
     }
 }
 

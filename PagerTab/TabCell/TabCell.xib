@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabCell" customModule="PagerTab" customModuleProvider="target">
             <connections>
+                <outlet property="containerStack" destination="uTa-Z9-Fam" id="4aw-2R-Ibr"/>
                 <outlet property="notificationCounter" destination="IX9-3G-fO9" id="t3p-OX-cIV"/>
                 <outlet property="notificationView" destination="930-oE-ASs" id="cf9-NC-Fnz"/>
                 <outlet property="tabImageView" destination="zAB-XF-VsA" id="sD4-vx-7Tu"/>
@@ -17,32 +18,32 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view alpha="0.59999999999999998" contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="197" height="83"/>
+            <rect key="frame" x="0.0" y="0.0" width="334" height="132"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="hrp-vy-PK5">
-                    <rect key="frame" x="0.0" y="0.0" width="197" height="83"/>
+                    <rect key="frame" x="0.0" y="8" width="334" height="116"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zAB-XF-VsA">
-                            <rect key="frame" x="0.0" y="0.0" width="197" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3e-ey-76J">
-                            <rect key="frame" x="0.0" y="54" width="197" height="29"/>
+                            <rect key="frame" x="0.0" y="54" width="334" height="62"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uTa-Z9-Fam">
-                                    <rect key="frame" x="66.5" y="0.0" width="64" height="29"/>
+                                    <rect key="frame" x="133" y="0.0" width="68" height="62"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6X2-TZ-os5">
-                                            <rect key="frame" x="0.0" y="4.5" width="42" height="20.5"/>
+                                            <rect key="frame" x="0.0" y="21" width="42" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="930-oE-ASs" customClass="RoundedView" customModule="PagerTab" customModuleProvider="target">
-                                            <rect key="frame" x="50" y="7.5" width="14" height="14"/>
+                                        <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="930-oE-ASs" customClass="RoundedView" customModule="PagerTab" customModuleProvider="target">
+                                            <rect key="frame" x="50" y="22" width="18" height="18"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IX9-3G-fO9">
-                                                    <rect key="frame" x="4.5" y="1.5" width="5" height="11"/>
+                                                    <rect key="frame" x="6.5" y="3.5" width="5" height="11"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="9"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -51,7 +52,7 @@
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="930-oE-ASs" secondAttribute="height" id="2bC-Pk-Jgi"/>
-                                                <constraint firstAttribute="height" constant="14" id="8AZ-Aq-9YR"/>
+                                                <constraint firstAttribute="height" constant="18" id="8AZ-Aq-9YR"/>
                                                 <constraint firstItem="IX9-3G-fO9" firstAttribute="centerX" secondItem="930-oE-ASs" secondAttribute="centerX" id="LXM-Xh-VGP"/>
                                                 <constraint firstItem="IX9-3G-fO9" firstAttribute="centerY" secondItem="930-oE-ASs" secondAttribute="centerY" id="ZgS-3U-7TT"/>
                                             </constraints>
@@ -77,13 +78,13 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hrp-vy-PK5" secondAttribute="trailing" id="RJb-bx-tWh"/>
-                <constraint firstAttribute="bottom" secondItem="hrp-vy-PK5" secondAttribute="bottom" id="SFf-QO-yEF"/>
+                <constraint firstAttribute="bottom" secondItem="hrp-vy-PK5" secondAttribute="bottom" constant="8" id="SFf-QO-yEF"/>
                 <constraint firstItem="hrp-vy-PK5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YpV-L0-cy6"/>
-                <constraint firstItem="hrp-vy-PK5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yOT-jV-RGW"/>
+                <constraint firstItem="hrp-vy-PK5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="yOT-jV-RGW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="244" y="146"/>
+            <point key="canvasLocation" x="340.57971014492756" y="162.05357142857142"/>
         </view>
     </objects>
 </document>

@@ -11,6 +11,7 @@ import UIKit
 open class PagerRootViewController: UIViewController {
 
     // MARK: - UI Variables
+    private var tabContainer = UIView()
     private var tabStackView = UIStackView()
     private var indicatorView = UIView()
     private weak var indicatorWidthConstraint: NSLayoutConstraint?
@@ -38,8 +39,12 @@ open class PagerRootViewController: UIViewController {
         self.dataSource = dataSource
     }
     
-    public func customise(with dictionary: CustomizationDictionary) {
+    public func customize(with dictionary: CustomizationDictionary) {
         self.customizationDictionary = dictionary
+    }
+    
+    public func updateCounter(at index: Int, with count: Int) {
+        tabs[safe: index]?.updateCounter(with: count)
     }
 }
 
@@ -48,32 +53,35 @@ extension PagerRootViewController {
     
     /// Main function that prepares the UI
     private func prepareUI() {
-        let topStackView = generateTabBar()
+        let tabContainer = generateTabBar()
         let containerView = generateContainerView()
         
-        let mainStackView = UIStackView(arrangedSubviews: [topStackView, containerView])
+        let mainStackView = UIStackView(arrangedSubviews: [tabContainer, containerView])
         mainStackView.axis = .vertical
         self.view.addSubview(mainStackView)
-        
         mainStackView.constraintToSafeArea(self.view)
     
     }
     
-    private func generateTabBar() -> UIStackView {
+    private func generateTabBar() -> UIView {
         
+        let tabContainer = configureTabContainer()
         let indicatorContainer = configureIndicatorView()
-        let topStack = UIStackView(arrangedSubviews: [tabStackView, indicatorContainer])
+        
+        let topStack = UIStackView(arrangedSubviews: [tabContainer, indicatorContainer])
         topStack.axis = .vertical
         tabStackView.distribution = .fillEqually
         
-        // set the height of the tabStackView and indicator view
-        // TODO: Add customise key for height
-        tabStackView.translatesAutoresizingMaskIntoConstraints = false
-        indicatorView.translatesAutoresizingMaskIntoConstraints = false
-        
-        tabStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-
         return topStack
+    }
+    
+    private func configureTabContainer() -> UIView {
+        self.tabContainer = UIView()
+        
+        tabContainer.addSubview(tabStackView)
+        tabStackView.constraint(to: tabContainer)
+        
+        return tabContainer
     }
     
     private func configureIndicatorView() -> UIView {
@@ -103,7 +111,6 @@ extension PagerRootViewController {
     
     private func generateContainerView() -> UIView {
         let container = UIView()
-        container.backgroundColor = .blue
         
         self.pager = MainPageViewController.init(transitionStyle: .scroll,
                                                  navigationOrientation: .horizontal,
@@ -115,7 +122,6 @@ extension PagerRootViewController {
         
         pager.view.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(pager.view)
-        pager.view.backgroundColor = .green
         pager.view.constraint(to: container)
         pager.didMove(toParent: self)
         return container
@@ -137,7 +143,8 @@ extension PagerRootViewController {
     
     @objc private func tabDidTapped(_ gesture: UITapGestureRecognizer) {
         guard let currentIndex = pager?.getCurrentIndex(),
-            let destinationIndex = tabs.firstIndex(where: { $0 == gesture.view })
+            let destinationIndex = tabs.firstIndex(where: { $0 == gesture.view }),
+            currentIndex != destinationIndex
             else { return }
         
         // Disable user interaction to not spam the user
@@ -164,10 +171,16 @@ extension PagerRootViewController {
         self.customizationDictionary.forEach { key, value in
             switch key {
             case .tabBackgroundColor:
-                self.tabs.forEach { $0.backgroundColor = value as? UIColor }
+                self.tabContainer.backgroundColor = value as? UIColor
                 
             case .indicatorColor:
                 self.indicatorView.backgroundColor = value as? UIColor
+                
+            case .textColor:
+                self.tabs.forEach { $0.setTextColor(value as? UIColor) }
+            
+            case .badgeColor:
+                self.tabs.forEach { $0.setBadgeColor(value as? UIColor) }
             }
         }
     }

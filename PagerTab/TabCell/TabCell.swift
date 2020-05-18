@@ -17,6 +17,8 @@ class TabCell: UIView, XibConnected, TabCellProtocol {
 
     @IBOutlet private weak var tabImageView: UIImageView!
     @IBOutlet private weak var tabLabel: UILabel!
+    @IBOutlet private weak var containerStack: UIStackView!
+    
     @IBOutlet private weak var notificationView: RoundedView!
     @IBOutlet private weak var notificationCounter: UILabel!
     
@@ -42,14 +44,29 @@ class TabCell: UIView, XibConnected, TabCellProtocol {
         }
     }
     
+    func setTextColor(_ color: UIColor?) {
+        self.tabLabel.textColor = color
+    }
+    
+    func setBadgeColor(_ color: UIColor?) {
+        self.notificationView.backgroundColor = color
+    }
+    
+    func updateCounter(with count: Int) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.notificationCounter.text = String(count)
+            self?.notificationView.alpha = count == 0 ? 0 : 1
+        }
+    }
+    
     func animate(isShowing: Bool) {
         UIView.animate(withDuration: 0.3) {
             if isShowing {
-                self.tabLabel.transform = .init(scaleX: 1.2, y: 1.2)
-                self.tabLabel.alpha = 1
+                self.containerStack.transform = .init(scaleX: 1.2, y: 1.2)
+                self.containerStack.alpha = 1
             } else {
-                self.tabLabel.transform = .identity
-                self.tabLabel.alpha = 0.6
+                self.containerStack.transform = .identity
+                self.containerStack.alpha = 0.6
             }
         }
     }
