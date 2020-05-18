@@ -20,7 +20,6 @@
 		7D7D70312471EE5700660113 /* PagerRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70272471EE5700660113 /* PagerRootViewController.swift */; };
 		7D7D70322471EE5700660113 /* PagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70282471EE5700660113 /* PagerProtocols.swift */; };
 		7D7D70332471EE5700660113 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70292471EE5700660113 /* MainPageViewController.swift */; };
-		7D7D70342471EE5700660113 /* PagerTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D7D702B2471EE5700660113 /* PagerTab.storyboard */; };
 		7D7D70442472060200660113 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70432472060200660113 /* AppDelegate.swift */; };
 		7D7D70462472060200660113 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70452472060200660113 /* SceneDelegate.swift */; };
 		7D7D70482472060200660113 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70472472060200660113 /* ViewController.swift */; };
@@ -75,7 +74,6 @@
 		7D7D70272471EE5700660113 /* PagerRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerRootViewController.swift; sourceTree = "<group>"; };
 		7D7D70282471EE5700660113 /* PagerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerProtocols.swift; sourceTree = "<group>"; };
 		7D7D70292471EE5700660113 /* MainPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
-		7D7D702B2471EE5700660113 /* PagerTab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PagerTab.storyboard; sourceTree = "<group>"; };
 		7D7D70412472060200660113 /* PagerTabExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PagerTabExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D7D70432472060200660113 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D7D70452472060200660113 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				7D7D70262471EE5700660113 /* Pager */,
-				7D7D702A2471EE5700660113 /* Storyboards */,
 				7D7D70232471EE5700660113 /* TabCell */,
 				7D7D701F2471EE5700660113 /* Utils */,
 				7D7D70002471EC4800660113 /* PagerTab.h */,
@@ -190,14 +187,6 @@
 				7D7D70292471EE5700660113 /* MainPageViewController.swift */,
 			);
 			path = Pager;
-			sourceTree = "<group>";
-		};
-		7D7D702A2471EE5700660113 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				7D7D702B2471EE5700660113 /* PagerTab.storyboard */,
-			);
-			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		7D7D70422472060200660113 /* PagerTabExample */ = {
@@ -330,7 +319,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D7D702F2471EE5700660113 /* TabCell.xib in Resources */,
-				7D7D70342471EE5700660113 /* PagerTab.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
