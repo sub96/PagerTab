@@ -16,16 +16,20 @@ class ViewController: PagerRootViewController {
         var dataSource = DataSource()
         let first = UIViewController()
         first.view.backgroundColor = .yellow
-        dataSource.append((vc: first, tabType: .soloText(.init(string: "cucu"))))
-        dataSource.append((vc: UIViewController(), tabType: .soloText(.init(string: "yoyo"))))
+        dataSource.append((vc: first,
+                           tabType: .soloText(.init(string: "cucu"))))
+        dataSource.append((vc: UIViewController(),
+                           tabType: .soloText(.init(string: "yoyo"))))
 
         self.configure(with: dataSource)
         
         var customKeys = CustomizationDictionary()
-        self.view.backgroundColor = UIColor.purple
-        customKeys[.tabBackgroundColor] = UIColor.green
+        customKeys[.tabBackgroundColor] = UIColor.systemRed
         customKeys[.indicatorColor] = UIColor.blue
+        customKeys[.textColor] = UIColor.white
+
         self.customize(with: customKeys)
+        
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             self.count += 1
             self.updateCounter(at: 1, with: self.count)

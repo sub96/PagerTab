@@ -63,6 +63,5 @@ extension UIView {
             self.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
             self.trailingAnchor.constraint(equalTo: parent.trailingAnchor)
         ])
-
     }
 }

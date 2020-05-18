@@ -17,7 +17,6 @@ class TabCell: UIView, XibConnected, TabCellProtocol {
 
     @IBOutlet private weak var tabImageView: UIImageView!
     @IBOutlet private weak var tabLabel: UILabel!
-    @IBOutlet private weak var containerStack: UIStackView!
     
     @IBOutlet private weak var notificationView: RoundedView!
     @IBOutlet private weak var notificationCounter: UILabel!
@@ -62,11 +61,15 @@ class TabCell: UIView, XibConnected, TabCellProtocol {
     func animate(isShowing: Bool) {
         UIView.animate(withDuration: 0.3) {
             if isShowing {
-                self.containerStack.transform = .init(scaleX: 1.2, y: 1.2)
-                self.containerStack.alpha = 1
+                self.tabLabel.transform = .init(scaleX: 1.2, y: 1.2)
+                self.tabLabel.alpha = 1
+//                self.notificationView.transform = .init(scaleX: 1.2, y: 1.2)
+//                self.notificationView.alpha = 1
             } else {
-                self.containerStack.transform = .identity
-                self.containerStack.alpha = 0.6
+                self.tabLabel.transform = .identity
+                self.tabLabel.alpha = 0.6
+//                self.notificationView.transform = .identity
+//                self.notificationView.alpha = 0.6
             }
         }
     }

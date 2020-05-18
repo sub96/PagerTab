@@ -29,7 +29,7 @@ open class PagerRootViewController: UIViewController {
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         prepareUI()
-        configureTab()
+        configureDataSource()
         customize()
         tabs.first?.animate(isShowing: true)
     }
@@ -65,7 +65,7 @@ extension PagerRootViewController {
     
     private func generateTabBar() -> UIView {
         
-        let tabContainer = configureTabContainer()
+        configureTabContainer()
         let indicatorContainer = configureIndicatorView()
         
         let topStack = UIStackView(arrangedSubviews: [tabContainer, indicatorContainer])
@@ -75,13 +75,9 @@ extension PagerRootViewController {
         return topStack
     }
     
-    private func configureTabContainer() -> UIView {
-        self.tabContainer = UIView()
-        
+    private func configureTabContainer() {
         tabContainer.addSubview(tabStackView)
         tabStackView.constraint(to: tabContainer)
-        
-        return tabContainer
     }
     
     private func configureIndicatorView() -> UIView {
@@ -89,7 +85,6 @@ extension PagerRootViewController {
         indicatorContainer.addSubview(indicatorView)
         
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
-        indicatorContainer.translatesAutoresizingMaskIntoConstraints = false
         
         // TODO: Add customise key for height constraint
         NSLayoutConstraint.activate([
@@ -103,7 +98,6 @@ extension PagerRootViewController {
         indicatorWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: 30)
         indicatorWidthConstraint?.isActive = true
         
-        // TODO: Add customise key for color
         indicatorView.backgroundColor = .green
         
         return indicatorContainer
@@ -112,9 +106,9 @@ extension PagerRootViewController {
     private func generateContainerView() -> UIView {
         let container = UIView()
         
-        self.pager = MainPageViewController.init(transitionStyle: .scroll,
-                                                 navigationOrientation: .horizontal,
-                                                 options: nil)
+        self.pager = MainPageViewController(transitionStyle: .scroll,
+                                            navigationOrientation: .horizontal,
+                                            options: nil)
         
         pager.configureDataSource(with: dataSource,
                                   animatorDelegate: self)
@@ -127,7 +121,7 @@ extension PagerRootViewController {
         return container
     }
     
-    private func configureTab() {
+    private func configureDataSource() {
         self.indicatorWidthConstraint?.constant = UIScreen.main.bounds.width / CGFloat(dataSource.count)
         tabStackView.isMultipleTouchEnabled = false
         for data in dataSource {
@@ -172,7 +166,8 @@ extension PagerRootViewController {
             switch key {
             case .tabBackgroundColor:
                 self.tabContainer.backgroundColor = value as? UIColor
-                
+//                self.tabContainer.layer.opacity = 0.85
+//                self.tabContainer.isOpaque = false
             case .indicatorColor:
                 self.indicatorView.backgroundColor = value as? UIColor
                 
