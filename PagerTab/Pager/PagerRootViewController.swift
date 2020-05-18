@@ -22,6 +22,7 @@ open class PagerRootViewController: UIViewController {
     private var pager: MainPageViewController!
     private var customizationDictionary: CustomizationDictionary = [:]
 
+    private var isInitialized = false
     // MARK: - LifeCycle
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +30,13 @@ open class PagerRootViewController: UIViewController {
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        prepareUI()
-        configureDataSource()
-        customize()
-        tabs.first?.animate(isShowing: true)
+        if !isInitialized {
+            prepareUI()
+            configureDataSource()
+            customize()
+            tabs.first?.animate(isShowing: true)
+            isInitialized = true
+        }
     }
     
     // MARK: - Public methods

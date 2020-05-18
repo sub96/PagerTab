@@ -34,7 +34,7 @@ class ViewController: PagerRootViewController {
         customKeys[.isScrollinEnabled] = false
         self.customize(with: customKeys)
         
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
             self.count += 1
             self.updateCounter(at: 1, with: self.count)
         }
