@@ -13,8 +13,7 @@
 		7D7D700C2471EC4800660113 /* PagerTabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D700B2471EC4800660113 /* PagerTabTests.swift */; };
 		7D7D700E2471EC4800660113 /* PagerTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D7D70002471EC4800660113 /* PagerTab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7D7D702C2471EE5700660113 /* Collection+util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70202471EE5700660113 /* Collection+util.swift */; };
-		7D7D702D2471EE5700660113 /* XibConnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70212471EE5700660113 /* XibConnected.swift */; };
-		7D7D702E2471EE5700660113 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70222471EE5700660113 /* RoundedView.swift */; };
+		7D7D702D2471EE5700660113 /* Constraints + SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70212471EE5700660113 /* Constraints + SafeArea.swift */; };
 		7D7D702F2471EE5700660113 /* TabCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D7D70242471EE5700660113 /* TabCell.xib */; };
 		7D7D70302471EE5700660113 /* TabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70252471EE5700660113 /* TabCell.swift */; };
 		7D7D70312471EE5700660113 /* PagerRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7D70272471EE5700660113 /* PagerRootViewController.swift */; };
@@ -67,8 +66,7 @@
 		7D7D700B2471EC4800660113 /* PagerTabTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerTabTests.swift; sourceTree = "<group>"; };
 		7D7D700D2471EC4800660113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D7D70202471EE5700660113 /* Collection+util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+util.swift"; sourceTree = "<group>"; };
-		7D7D70212471EE5700660113 /* XibConnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibConnected.swift; sourceTree = "<group>"; };
-		7D7D70222471EE5700660113 /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		7D7D70212471EE5700660113 /* Constraints + SafeArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constraints + SafeArea.swift"; sourceTree = "<group>"; };
 		7D7D70242471EE5700660113 /* TabCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabCell.xib; sourceTree = "<group>"; };
 		7D7D70252471EE5700660113 /* TabCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCell.swift; sourceTree = "<group>"; };
 		7D7D70272471EE5700660113 /* PagerRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerRootViewController.swift; sourceTree = "<group>"; };
@@ -164,8 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				7D7D70202471EE5700660113 /* Collection+util.swift */,
-				7D7D70212471EE5700660113 /* XibConnected.swift */,
-				7D7D70222471EE5700660113 /* RoundedView.swift */,
+				7D7D70212471EE5700660113 /* Constraints + SafeArea.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -348,10 +345,9 @@
 			files = (
 				7D7D702C2471EE5700660113 /* Collection+util.swift in Sources */,
 				7D7D70332471EE5700660113 /* MainPageViewController.swift in Sources */,
-				7D7D702D2471EE5700660113 /* XibConnected.swift in Sources */,
+				7D7D702D2471EE5700660113 /* Constraints + SafeArea.swift in Sources */,
 				7D7D70312471EE5700660113 /* PagerRootViewController.swift in Sources */,
 				7D7D70322471EE5700660113 /* PagerProtocols.swift in Sources */,
-				7D7D702E2471EE5700660113 /* RoundedView.swift in Sources */,
 				7D7D70302471EE5700660113 /* TabCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

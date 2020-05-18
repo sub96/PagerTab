@@ -13,12 +13,12 @@ protocol TabCellProtocol: class {
     func animate(isShowing: Bool)
 }
 
-class TabCell: UIView, XibConnected, TabCellProtocol {
+class TabCell: UIView, TabCellProtocol {
 
     @IBOutlet private weak var tabImageView: UIImageView!
     @IBOutlet private weak var tabLabel: UILabel!
     
-    @IBOutlet private weak var notificationView: RoundedView!
+    @IBOutlet private weak var notificationView: UIView!
     @IBOutlet private weak var notificationCounter: UILabel!
     
     override init(frame: CGRect) {
@@ -41,6 +41,7 @@ class TabCell: UIView, XibConnected, TabCellProtocol {
             self.tabImageView.image = image
             self.tabLabel.attributedText = text
         }
+        self.notificationView.layer.cornerRadius = self.notificationView.bounds.height / 2
     }
     
     func setTextColor(_ color: UIColor?) {
@@ -71,8 +72,35 @@ class TabCell: UIView, XibConnected, TabCellProtocol {
                 self?.tabLabel.alpha = 0.6
                 //                self?.notificationView.transform = .identity
                 //                self?.notificationView.alpha = self?.notificationCounter.text == "0" ? 1 : 1
-
+                
             }
         }
+    }
+}
+
+extension TabCell {
+    func connectXib() {
+        
+        self.backgroundColor = .clear
+        let view = self.loadNib()
+        view.frame = self.bounds
+        self.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate(
+            [
+                view.topAnchor.constraint(equalTo: self.topAnchor),
+                view.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                view.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                view.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            ]
+        )
+    }
+    
+    /** Loads instance from nib with the same name. */
+    func loadNib() -> UIView {
+        let bundle = Bundle(for: type(of: self))
+        let nibName = String(describing: type(of: self))
+        let nib = UINib(nibName: nibName, bundle: bundle)
+        return nib.instantiate(withOwner: self, options: nil).first as! UIView //swiftlint:disable:this force_cast
     }
 }

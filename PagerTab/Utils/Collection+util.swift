@@ -1,8 +1,8 @@
 //
 //  Collection+util.swift
-//  Vormats Demos
+//  VoNo
 //
-//  Created by Vakhid Betrakhmadov on 6/3/19.
+//  Created by Suhaib Al Saghir on 6/3/19.
 //  Copyright © 2019 DTT Multimedia. All rights reserved.
 //
 
