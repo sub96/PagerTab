@@ -3,12 +3,12 @@ Pod::Spec.new do |s|
 # 1
 s.platform = :ios
 s.ios.deployment_target = '12.0'
-s.name = "PagerTab"
+s.name = "SPagerTab"
 s.summary = "PagerTab is a custom pager with a top bar."
 s.requires_arc = true
 
 # 2
-s.version = "0.1.3"
+s.version = "0.1.4"
 
 # 3
 s.license = { :type => "MIT", :file => "LICENSE" }
