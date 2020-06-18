@@ -55,7 +55,7 @@ class TabCell: UIView, TabCellProtocol {
     func updateCounter(with count: Int) {
         self.notificationView.isHidden = count == 0
         UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.notificationCounter.text = String(count)
+            self?.notificationCounter.text = count >= 99 ? "+\(99)" : String(count)
             self?.notificationView.alpha = count == 0 ? 0 : 1
         }
     }
