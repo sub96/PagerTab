@@ -56,7 +56,13 @@ class TabCell: UIView, TabCellProtocol {
         self.notificationView.isHidden = count == 0
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.notificationCounter.text = count >= 99 ? "+\(99)" : String(count)
-            self?.notificationView.alpha = count == 0 ? 0 : 1
+            if count == 0 {
+                self?.notificationView.alpha = 0
+            } else {
+                let isSelected = self?.notificationView.transform != .identity
+                self?.notificationView.alpha = isSelected ? 1 : 0.6
+
+            }
         }
     }
     
@@ -65,13 +71,15 @@ class TabCell: UIView, TabCellProtocol {
             if isShowing {
                 self?.tabLabel.transform = .init(scaleX: 1.2, y: 1.2)
                 self?.tabLabel.alpha = 1
-                //                self?.notificationView.transform = .init(scaleX: 1.2, y: 1.2)
-                //                self?.notificationView.alpha = self?.notificationCounter.text == "0" ? 1 : 1
+                
+                self?.notificationView.transform = .init(scaleX: 1.2, y: 1.2)
+                self?.notificationView.alpha = self?.notificationCounter.text == "0" ? 0 : 1
             } else {
                 self?.tabLabel.transform = .identity
                 self?.tabLabel.alpha = 0.6
-                //                self?.notificationView.transform = .identity
-                //                self?.notificationView.alpha = self?.notificationCounter.text == "0" ? 1 : 1
+                
+                self?.notificationView.transform = .identity
+                self?.notificationView.alpha = self?.notificationCounter.text == "0" ? 0 : 0.6
                 
             }
         }
