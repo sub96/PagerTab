@@ -31,9 +31,6 @@ open class PagerRootViewController: UIViewController {
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if !isInitialized {
-            prepareUI()
-            configureDataSource()
-            customize()
             tabs.first?.animate(isShowing: true)
             isInitialized = true
         }
@@ -42,6 +39,9 @@ open class PagerRootViewController: UIViewController {
     // MARK: - Public methods
     public func configure(with dataSource: DataSource) {
         self.dataSource = dataSource
+        prepareUI()
+        configureDataSource()
+        customize()
     }
     
     public func customize(with dictionary: CustomizationDictionary) {
@@ -54,6 +54,16 @@ open class PagerRootViewController: UIViewController {
     
     public func updateCounter(at index: Int, with count: Int) {
         tabs[safe: index]?.updateCounter(with: count)
+    }
+    
+    public func set(viewControllers: [UIViewController],
+                    direction: UIPageViewController.NavigationDirection,
+                    animated: Bool,
+                    completion: ((Bool) -> Void)?) {
+        self.pager.setViewControllers(viewControllers,
+                                      direction: direction,
+                                      animated: animated,
+                                      completion: completion)
     }
 }
 

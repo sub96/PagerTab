@@ -19,7 +19,9 @@ class MainPageViewController: UIPageViewController {
     private weak var animatorDelegate: MainPageViewControllerDelegate?
     
     // MARK: - Life cycle
-    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+    override init(transitionStyle style: UIPageViewController.TransitionStyle,
+                  navigationOrientation: UIPageViewController.NavigationOrientation,
+                  options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: style,
                    navigationOrientation: navigationOrientation,
                    options: options)
