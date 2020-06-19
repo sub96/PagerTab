@@ -69,10 +69,10 @@ class TabCell: UIView, TabCellProtocol {
     func animate(isShowing: Bool) {
         UIView.animate(withDuration: 0.3) { [weak self] in
             if isShowing {
-                self?.tabLabel.transform = .init(scaleX: 1.2, y: 1.2)
+                self?.tabLabel.transform = .init(scaleX: 1.1, y: 1.1)
                 self?.tabLabel.alpha = 1
                 
-                self?.notificationView.transform = .init(scaleX: 1.2, y: 1.2)
+                self?.notificationView.transform = .init(scaleX: 1.1, y: 1.1)
                 self?.notificationView.alpha = self?.notificationCounter.text == "0" ? 0 : 1
             } else {
                 self?.tabLabel.transform = .identity
