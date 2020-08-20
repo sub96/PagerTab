@@ -56,6 +56,11 @@ open class PagerRootViewController: UIViewController {
         tabs[safe: index]?.updateCounter(with: count)
     }
     
+    public func updateBadgeColor(at index: Int, with color: UIColor) {
+        guard index <= tabs.count - 1 else { return }
+        tabs[index].setBadgeColor(color)
+    }
+    
     public func set(viewControllers: [UIViewController],
                     direction: UIPageViewController.NavigationDirection,
                     animated: Bool,
