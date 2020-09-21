@@ -202,6 +202,9 @@ extension PagerRootViewController {
 
             case .isScrollinEnabled:
                 self.pager.isScrollingEnabled(value as? Bool)
+                
+            case .textFont:
+                self.tabs.forEach { $0.setTextFont(value as? UIFont) }
             }
         }
     }

@@ -41,5 +41,6 @@ public enum CustomKeys: String {
     case textColor
     case badgeColor
     case isScrollinEnabled
+    case textFont
 }
 

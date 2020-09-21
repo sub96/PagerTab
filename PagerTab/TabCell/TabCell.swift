@@ -52,6 +52,10 @@ class TabCell: UIView, TabCellProtocol {
         self.notificationView.backgroundColor = color
     }
     
+    func setTextFont(_ font: UIFont?) {
+        self.tabLabel.font = font
+    }
+    
     func updateCounter(with count: Int) {
         self.notificationView.isHidden = count == 0
         UIView.animate(withDuration: 0.3) { [weak self] in
@@ -61,7 +65,6 @@ class TabCell: UIView, TabCellProtocol {
             } else {
                 let isSelected = self?.notificationView.transform != .identity
                 self?.notificationView.alpha = isSelected ? 1 : 0.6
-
             }
         }
     }
