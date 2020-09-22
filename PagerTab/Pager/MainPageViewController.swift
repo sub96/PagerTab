@@ -14,7 +14,8 @@ class MainPageViewController: UIPageViewController {
     private var currentIndex: Int = 0
     private var destinationIndex: Int = 0
     private var tabRequestedScroll = false
-    private var orderedViewControllers: DataSource = []
+    private var orderedViewControllers: SPagerModels.DataSource = []
+    private var defaultIndex: Int = 0
     private var scrollView: UIScrollView?
     private weak var animatorDelegate: MainPageViewControllerDelegate?
     
@@ -34,22 +35,21 @@ class MainPageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDelegates()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        guard !orderedViewControllers.isEmpty else { return }
-        self.setViewControllers([orderedViewControllers.first!.vc],
+        guard let defaultPage = orderedViewControllers[safe: defaultIndex]?.vc else { return }
+        self.setViewControllers([defaultPage],
                                 direction: .forward,
                                 animated: false,
                                 completion: nil)
     }
     
     // MARK: - Public methods
-    func configureDataSource(with orderedViewControllers: DataSource,
+    func configureDataSource(with orderedViewControllers: SPagerModels.DataSource,
+                             defaultIndex: Int,
                              animatorDelegate: MainPageViewControllerDelegate) {
         self.orderedViewControllers = orderedViewControllers
         self.animatorDelegate = animatorDelegate
+        self.defaultIndex = defaultIndex
+        self.currentIndex = defaultIndex
     }
     
     func isScrollingEnabled(_ isEnabled: Bool?) {
@@ -61,12 +61,17 @@ class MainPageViewController: UIPageViewController {
         let destination = orderedViewControllers[index].vc
         let direction: NavigationDirection = index > currentIndex ?
             .forward : .reverse
-        self.setViewControllers([destination],
-                                direction: direction,
-                                animated: true) { [weak self] _ in
-                                    self?.currentIndex = index
-                                    self?.tabRequestedScroll = false
-                                    onCompletion()
+        DispatchQueue.main.async { [unowned self] in
+            self.setViewControllers([destination],
+                                    direction: direction,
+                                    animated: true) { _ in
+                DispatchQueue.main.async {
+                    self.currentIndex = index
+                    self.tabRequestedScroll = false
+                    self.animatorDelegate?.pagerDidFinishAnimating(to: index, direction: direction)
+                    onCompletion()
+                }
+            }
         }
     }
     
@@ -140,15 +145,14 @@ extension MainPageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController,
                             didFinishAnimating finished: Bool,
                             previousViewControllers: [UIViewController],
-                            transitionCompleted completed: Bool) {        
+                            transitionCompleted completed: Bool) {
         if completed && finished {
             guard let source = orderedViewControllers
                 .firstIndex(where: { $0.vc == previousViewControllers.first }) else { return }
             currentIndex = destinationIndex
             let direction: NavigationDirection = destinationIndex > source ?
                 .forward : .reverse
-            animatorDelegate?.pagerDidFinishAnimating(pageViewController,
-                                                      to: currentIndex,
+            animatorDelegate?.pagerDidFinishAnimating(to: currentIndex,
                                                       direction: direction)
         }
     }
@@ -173,11 +177,5 @@ extension MainPageViewController: UIScrollViewDelegate {
                                          current: self.currentIndex,
                                          direction: direction,
                                          completed: percentComplete)
-    }
-}
-
-extension CGFloat {
-    static func random() -> CGFloat {
-        return CGFloat(arc4random()) / CGFloat(UInt32.max)
     }
 }

@@ -31,7 +31,7 @@ class TabCell: UIView, TabCellProtocol {
         connectXib()
     }
     
-    func configure(with tabType: TabType) {
+    func configure(with tabType: SPagerModels.TabType) {
         switch tabType {
         case .soloText(let text):
             self.tabImageView.isHidden = true
@@ -56,6 +56,16 @@ class TabCell: UIView, TabCellProtocol {
         self.tabLabel.font = font
     }
     
+    func setImageHeight(_ height: CGFloat?) {
+        guard let height = height else { return }
+        self.tabImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.tabImageView.heightAnchor.constraint(equalToConstant: height).isActive = true
+    }
+    
+    func setImageTint(_ color: UIColor?) {
+        self.tabImageView.tintColor = color
+    }
+    
     func updateCounter(with count: Int) {
         self.notificationView.isHidden = count == 0
         UIView.animate(withDuration: 0.3) { [weak self] in
@@ -75,11 +85,17 @@ class TabCell: UIView, TabCellProtocol {
                 self?.tabLabel.transform = .init(scaleX: 1.1, y: 1.1)
                 self?.tabLabel.alpha = 1
                 
+                self?.tabImageView.transform = .init(scaleX: 1.1, y: 1.1)
+                self?.tabImageView.alpha = 1
+
                 self?.notificationView.transform = .init(scaleX: 1.1, y: 1.1)
                 self?.notificationView.alpha = self?.notificationCounter.text == "0" ? 0 : 1
             } else {
                 self?.tabLabel.transform = .identity
                 self?.tabLabel.alpha = 0.6
+                
+                self?.tabImageView.transform = .identity
+                self?.tabImageView.alpha = 0.6
                 
                 self?.notificationView.transform = .identity
                 self?.notificationView.alpha = self?.notificationCounter.text == "0" ? 0 : 0.6

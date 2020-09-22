@@ -8,9 +8,56 @@
 
 import UIKit
 
+public enum SPagerModels {
+    public typealias CustomizationDictionary = [CustomKeys: Any]
+    public typealias DataSource = [DataSourceElement]
+
+    /// Dictionary with all the possible customizations
+    ///
+    /// - Keys:
+    ///   - tabBackgroundColor: UIColor
+    ///   - indicatorBackgroundColor: UIColor
+    ///   - indicatorColor: UIColor
+    ///   - textColor: UIColor
+    ///   - badgeColor: UIColor
+    ///   - isScrollinEnabled: Bool
+    ///   - textFont: UIFont
+    ///   - imageHeight: CGFloat
+    ///   - imageTintColor: UIColor
+    public enum CustomKeys: String {
+        case tabBackgroundColor
+        case indicatorBackgroundColor
+        case indicatorColor
+        case textColor
+        case badgeColor
+        case isScrollinEnabled
+        case textFont
+        case imageHeight
+        case imageTintColor
+    }
+    
+    public struct DataSourceElement {
+        public let vc: UIViewController
+        public let identifier: Any
+        public let tabType: TabType
+        
+        public init(vc: UIViewController,
+                    identifier: Any,
+                    tabType: TabType) {
+            self.vc = vc
+            self.identifier = identifier
+            self.tabType = tabType
+        }
+    }
+    
+    public enum TabType {
+        case image(UIImage, NSAttributedString)
+        case soloText(NSAttributedString)
+    }
+}
+
 protocol MainPageViewControllerDelegate: class {
-    func pagerDidFinishAnimating(_ pager: UIPageViewController,
-                                 to currentIndex: Int,
+    func pagerDidFinishAnimating(to currentIndex: Int,
                                  direction: UIPageViewController.NavigationDirection)
     
     func pagerDidScroll(_ pager: UIPageViewController,
@@ -18,29 +65,3 @@ protocol MainPageViewControllerDelegate: class {
                         direction: UIPageViewController.NavigationDirection,
                         completed percentage: CGFloat)
 }
-
-public typealias DataSource = [(vc: UIViewController, tabType: TabType)]
-public typealias CustomizationDictionary = [CustomKeys: Any]
-
-public enum TabType {
-    case image(UIImage, NSAttributedString)
-    case soloText(NSAttributedString)
-}
-
-/// Dictionary with all the possible customizations
-///
-/// - Keys:
-///   - tabBackgroundColor: UIColor
-///   - indicatorColor: UIColor
-///   - textColor: UIColor
-///   - badgeColor: UIColor
-///   - isScrollinEnabled: Bool
-public enum CustomKeys: String {
-    case tabBackgroundColor
-    case indicatorColor
-    case textColor
-    case badgeColor
-    case isScrollinEnabled
-    case textFont
-}
-

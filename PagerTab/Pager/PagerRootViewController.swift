@@ -8,43 +8,57 @@
 
 import UIKit
 
+public protocol PagerRootDelegate: class {
+    func pagerDidFinishAnimating()
+}
+
 open class PagerRootViewController: UIViewController {
 
     // MARK: - UI Variables
     private var tabContainer = UIView()
     private var tabStackView = UIStackView()
     private var indicatorView = UIView()
+    private var indicatorContainer = UIView()
     private weak var indicatorWidthConstraint: NSLayoutConstraint?
     
     // MARK: - Data Variables
-    private var dataSource: DataSource = []
+    private var dataSource: SPagerModels.DataSource = []
+    private var defaultIndex: Int = 0
     private var tabs: [TabCell] = []
     private var pager: MainPageViewController!
-    private var customizationDictionary: CustomizationDictionary = [:]
+    private var customizationDictionary: SPagerModels.CustomizationDictionary = [:]
+    
+    // MARK: - Delegate
+    private weak var delegate: PagerRootDelegate?
 
     private var isInitialized = false
+    
     // MARK: - LifeCycle
     open override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    open override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if !isInitialized {
-            tabs.first?.animate(isShowing: true)
+            animate(from: 0, to: defaultIndex)
             isInitialized = true
         }
     }
     
     // MARK: - Public methods
-    public func configure(with dataSource: DataSource) {
+    public func configure(with dataSource: SPagerModels.DataSource,
+                          defaultIndex: Int?,
+                          delegate: PagerRootDelegate? = nil) {
         self.dataSource = dataSource
+        self.defaultIndex = defaultIndex ?? 0
+        self.delegate = delegate
         prepareUI()
-        configureDataSource()
+        configureTabStackView()
         customize()
     }
     
-    public func customize(with dictionary: CustomizationDictionary) {
+    public func customize(with dictionary: SPagerModels.CustomizationDictionary) {
         self.customizationDictionary = dictionary
     }
     
@@ -61,33 +75,49 @@ open class PagerRootViewController: UIViewController {
         tabs[index].setBadgeColor(color)
     }
     
+    public func setTabHidden(isHidden: Bool) {
+        self.tabContainer.isHidden = isHidden
+    }
+    
+    public func getCurrentIndex() -> Int {
+        return pager.getCurrentIndex()
+    }
+    
+    public func getCurrentVC() -> UIViewController {
+        let index = getCurrentIndex()
+        return dataSource[index].vc
+    }
+    
     public func set(viewControllers: [UIViewController],
                     direction: UIPageViewController.NavigationDirection,
                     animated: Bool,
                     completion: ((Bool) -> Void)?) {
-        self.pager.setViewControllers(viewControllers,
-                                      direction: direction,
-                                      animated: animated,
-                                      completion: completion)
+        DispatchQueue.main.async { [weak self] in
+            self?.pager.setViewControllers(viewControllers,
+                                           direction: direction,
+                                           animated: animated,
+                                           completion: completion)
+        }
     }
 }
 
 // MARK: - Private methods
-extension PagerRootViewController {
+private extension PagerRootViewController {
     
     /// Main function that prepares the UI
-    private func prepareUI() {
+    func prepareUI() {
         let tabContainer = generateTabBar()
         let containerView = generateContainerView()
         
         let mainStackView = UIStackView(arrangedSubviews: [tabContainer, containerView])
         mainStackView.axis = .vertical
-        self.view.addSubview(mainStackView)
+        
+        view.addSubview(mainStackView)
         mainStackView.constraintToSafeArea(self.view)
     
     }
     
-    private func generateTabBar() -> UIView {
+    func generateTabBar() -> UIView {
         
         configureTabContainer()
         let indicatorContainer = configureIndicatorView()
@@ -99,13 +129,13 @@ extension PagerRootViewController {
         return topStack
     }
     
-    private func configureTabContainer() {
+    func configureTabContainer() {
         tabContainer.addSubview(tabStackView)
         tabStackView.constraint(to: tabContainer)
     }
     
-    private func configureIndicatorView() -> UIView {
-        let indicatorContainer = UIView()
+    func configureIndicatorView() -> UIView {
+
         indicatorContainer.addSubview(indicatorView)
         
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
@@ -127,7 +157,7 @@ extension PagerRootViewController {
         return indicatorContainer
     }
     
-    private func generateContainerView() -> UIView {
+    func generateContainerView() -> UIView {
         let container = UIView()
         
         self.pager = MainPageViewController(transitionStyle: .scroll,
@@ -135,6 +165,7 @@ extension PagerRootViewController {
                                             options: nil)
         
         pager.configureDataSource(with: dataSource,
+                                  defaultIndex: defaultIndex,
                                   animatorDelegate: self)
         addChild(pager)
         
@@ -145,7 +176,7 @@ extension PagerRootViewController {
         return container
     }
     
-    private func configureDataSource() {
+    func configureTabStackView() {
         self.indicatorWidthConstraint?.constant = UIScreen.main.bounds.width / CGFloat(dataSource.count)
         tabStackView.isMultipleTouchEnabled = false
         for data in dataSource {
@@ -154,12 +185,13 @@ extension PagerRootViewController {
             let tapGesture = UITapGestureRecognizer.init(target: self,
                                                          action: #selector(tabDidTapped(_:)))
             tabCell.addGestureRecognizer(tapGesture)
+            tabCell.animate(isShowing: false)
             self.tabs.append(tabCell)
             self.tabStackView.addArrangedSubview(tabCell)
         }
     }
     
-    @objc private func tabDidTapped(_ gesture: UITapGestureRecognizer) {
+    @objc func tabDidTapped(_ gesture: UITapGestureRecognizer) {
         guard let currentIndex = pager?.getCurrentIndex(),
             let destinationIndex = tabs.firstIndex(where: { $0 == gesture.view }),
             currentIndex != destinationIndex
@@ -175,21 +207,27 @@ extension PagerRootViewController {
         })
         
         // Animate
+        self.animate(from: currentIndex, to: destinationIndex)
+    }
+    
+    func animate(from currentIndex: Int, to destinationIndex: Int) {
         self.tabs[safe: currentIndex]?.animate(isShowing: false)
         self.tabs[safe: destinationIndex]?.animate(isShowing: true)
 
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            guard let self = self else { return }
+        UIView.animate(withDuration: 0.3) { [unowned self] in
             self.indicatorView.frame.origin = CGPoint(x: CGFloat(destinationIndex) * self.indicatorView.bounds.width,
                                                       y: 0)
         }
     }
     
-    private func customize() {
+    func customize() {
         self.customizationDictionary.forEach { key, value in
             switch key {
             case .tabBackgroundColor:
                 self.tabContainer.backgroundColor = value as? UIColor
+                
+            case .indicatorBackgroundColor:
+                self.indicatorContainer.backgroundColor = value as? UIColor
 
             case .indicatorColor:
                 self.indicatorView.backgroundColor = value as? UIColor
@@ -205,6 +243,12 @@ extension PagerRootViewController {
                 
             case .textFont:
                 self.tabs.forEach { $0.setTextFont(value as? UIFont) }
+                
+            case .imageHeight:
+                self.tabs.forEach { $0.setImageHeight(value as? CGFloat) }
+                
+            case .imageTintColor:
+                self.tabs.forEach { $0.setImageTint(value as? UIColor) }
             }
         }
     }
@@ -224,13 +268,12 @@ extension PagerRootViewController: MainPageViewControllerDelegate {
                                                   y: 0)
     }
     
-    func pagerDidFinishAnimating(_ pager: UIPageViewController,
-                                 to currentIndex: Int,
+    func pagerDidFinishAnimating(to currentIndex: Int,
                                  direction: UIPageViewController.NavigationDirection) {
         let previousIndex = direction == .forward ?
             currentIndex - 1 : currentIndex + 1
         
-        self.tabs[safe: previousIndex]?.animate(isShowing: false)
-        self.tabs[safe: currentIndex]?.animate(isShowing: true)
+        self.animate(from: previousIndex, to: currentIndex)
+        self.delegate?.pagerDidFinishAnimating()
     }
 }

@@ -21,9 +21,9 @@ class ViewController: PagerRootViewController {
         let second = UIViewController()
         first.view.backgroundColor = .green
         let third = UIViewController()
-        first.view.backgroundColor = .green
+        first.view.backgroundColor = .yellow
         let forth = UIViewController()
-        first.view.backgroundColor = .green
+        first.view.backgroundColor = .purple
         
         let title1 = NSAttributedString.init(string: "Voice Memo")
         let title2 = NSAttributedString.init(string: "Voice to Text")
