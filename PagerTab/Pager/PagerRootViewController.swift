@@ -199,13 +199,14 @@ private extension PagerRootViewController {
         
         // Disable user interaction to not spam the user
         self.tabStackView.isUserInteractionEnabled = false
+        self.pager.view.endEditing(true)
         
         // Tell the pager that the user request scrolling
         self.pager?.tabDidRequestScroll(to: destinationIndex, onCompletion: { [weak self] in
             // Re enable user interaction
             self?.tabStackView.isUserInteractionEnabled = true
         })
-        
+
         // Animate
         self.animate(from: currentIndex, to: destinationIndex)
     }
