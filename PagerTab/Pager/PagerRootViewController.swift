@@ -99,6 +99,9 @@ open class PagerRootViewController: UIViewController {
                                            completion: completion)
         }
     }
+    
+    // MARK: - Open methods
+    open func tabDidPressed(at index: Int) { }
 }
 
 // MARK: - Private methods
@@ -202,6 +205,7 @@ private extension PagerRootViewController {
         self.pager.view.endEditing(true)
         
         // Tell the pager that the user request scrolling
+        self.tabDidPressed(at: destinationIndex)
         self.pager?.tabDidRequestScroll(to: destinationIndex, onCompletion: { [weak self] in
             // Re enable user interaction
             self?.tabStackView.isUserInteractionEnabled = true
