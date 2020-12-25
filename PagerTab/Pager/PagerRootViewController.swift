@@ -100,6 +100,27 @@ open class PagerRootViewController: UIViewController {
         }
     }
     
+    public func requestScroll(to page: SPagerModels.DataSourceElement) {
+        guard let currentIndex = pager?.getCurrentIndex(),
+              let destinationIndex = dataSource.firstIndex(where: { $0.vc == page.vc }),
+            currentIndex != destinationIndex
+            else { return }
+
+        // Disable user interaction to not spam the user
+        self.tabStackView.isUserInteractionEnabled = false
+        self.pager.view.endEditing(true)
+        
+        // Tell the pager that the user request scrolling
+        self.tabDidPressed(at: destinationIndex)
+        self.pager?.tabDidRequestScroll(to: destinationIndex, onCompletion: { [weak self] in
+            // Re enable user interaction
+            self?.tabStackView.isUserInteractionEnabled = true
+        })
+        
+        // Animate
+        self.animate(from: currentIndex, to: destinationIndex)
+    }
+    
     // MARK: - Open methods
     open func tabDidPressed(at index: Int) { }
 }
