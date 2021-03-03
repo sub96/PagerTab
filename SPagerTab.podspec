@@ -8,7 +8,7 @@ s.summary = "PagerTab is a custom pager with a top bar."
 s.requires_arc = true
 
 # 2
-s.version = "0.2.5"
+s.version = "0.2.6"
 
 # 3
 s.license = { :type => "MIT", :file => "LICENSE" }
