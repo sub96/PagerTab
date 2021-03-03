@@ -66,6 +66,10 @@ open class PagerRootViewController: UIViewController {
         pager.isScrollingEnabled(isEnabled)
     }
     
+    public func isTabUserInteractionEnabled(_ isEnabled: Bool) {
+        self.tabStackView.isUserInteractionEnabled = isEnabled
+    }
+    
     public func updateCounter(at index: Int, with count: Int) {
         tabs[safe: index]?.updateCounter(with: count)
     }
@@ -107,22 +111,25 @@ open class PagerRootViewController: UIViewController {
             else { return }
 
         // Disable user interaction to not spam the user
-        self.tabStackView.isUserInteractionEnabled = false
+        self.isTabUserInteractionEnabled(false)
         self.pager.view.endEditing(true)
         
         // Tell the pager that the user request scrolling
-        self.tabDidPressed(at: destinationIndex)
-        self.pager?.tabDidRequestScroll(to: destinationIndex, onCompletion: { [weak self] in
-            // Re enable user interaction
-            self?.tabStackView.isUserInteractionEnabled = true
-        })
+        self.tabDidPressed(at: destinationIndex) { [weak self] in
+            self?.pager?.tabDidRequestScroll(to: destinationIndex, onCompletion: {
+                // Re enable user interaction
+                self?.isTabUserInteractionEnabled(true)
+            })
+        }
         
         // Animate
         self.animate(from: currentIndex, to: destinationIndex)
     }
     
     // MARK: - Open methods
-    open func tabDidPressed(at index: Int) { }
+    open func tabDidPressed(at index: Int, onCompletion: @escaping () -> Void) {
+        onCompletion()
+    }
 }
 
 // MARK: - Private methods
@@ -226,11 +233,12 @@ private extension PagerRootViewController {
         self.pager.view.endEditing(true)
         
         // Tell the pager that the user request scrolling
-        self.tabDidPressed(at: destinationIndex)
-        self.pager?.tabDidRequestScroll(to: destinationIndex, onCompletion: { [weak self] in
-            // Re enable user interaction
-            self?.tabStackView.isUserInteractionEnabled = true
-        })
+        self.tabDidPressed(at: destinationIndex) {
+            self.pager?.tabDidRequestScroll(to: destinationIndex, onCompletion: { [weak self] in
+                // Re enable user interaction
+                self?.tabStackView.isUserInteractionEnabled = true
+            })
+        }
 
         // Animate
         self.animate(from: currentIndex, to: destinationIndex)

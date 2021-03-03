@@ -9,7 +9,6 @@
 import UIKit
 
 protocol TabCellProtocol: class {
-    
     func animate(isShowing: Bool)
 }
 
