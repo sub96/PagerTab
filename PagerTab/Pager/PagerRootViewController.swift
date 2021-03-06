@@ -87,9 +87,13 @@ open class PagerRootViewController: UIViewController {
         return pager.getCurrentIndex()
     }
     
-    public func getCurrentVC() -> UIViewController {
+    public func getCurrentVC() -> UIViewController? {
         let index = getCurrentIndex()
-        return dataSource[index].vc
+        return dataSource[safe: index]?.vc
+    }
+    
+    public func getViewController(at index: Int) -> UIViewController? {
+        return dataSource[safe: index]?.vc
     }
     
     public func set(viewControllers: [UIViewController],
